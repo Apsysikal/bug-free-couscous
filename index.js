@@ -7,12 +7,12 @@ async function main(alarmText) {
 
   // Modify config as needed
   const config = {
-    host: "smtp.engiega.ch",
+    host: "",
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "ga-winterthur@engiega.ch",
-      pass: "Engie_ga1224"
+      user: "",
+      pass: ""
     }
   }
   
