@@ -4,6 +4,16 @@ const nodemailer = require("nodemailer");
 
 let message = "";
 
+function onMessageReceived(message) {
+    console.log(`Received new message: ${message}`);
+    console.log(`Parsing message text...`);
+    
+    let messageText = message.text.trim().replace(/ +(?= )/g, '');
+    console.log(`Parsed message text: ${messageText}`);
+}
+
+
+
 const server = new SMTPServer({
     authOptional:true,
 
@@ -17,14 +27,12 @@ const server = new SMTPServer({
             skipTextToHtml: true
         })
             .then(parsed => {
-                messageText = parsed.text.trim().replace(/ +(?= )/g, '');
-                console.log(messageText)
-                main(messageText).catch(console.error);
+                onMessageReceived(parsed);
             })
             .catch(err => {console.log(err.message)});
 
-        
-        // Reset 
+        console.log(`Clearing message buffer. Waiting for next message.`);
+        // Reset
         message = "";
         callback(null);
       });
