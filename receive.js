@@ -1,6 +1,5 @@
 const SMTPServer = require("smtp-server").SMTPServer;
 const simpleParser = require('mailparser').simpleParser;
-const nodemailer = require("nodemailer");
 
 let message = "";
 
