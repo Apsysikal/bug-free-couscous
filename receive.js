@@ -7,9 +7,18 @@ let message = "";
 function onMessageReceived(message) {
     console.log(`Received new message: ${message}`);
     console.log(`Parsing message text...`);
-    
-    let messageText = message.text.trim().replace(/ +(?= )/g, '');
-    console.log(`Parsed message text: ${messageText}`);
+
+    let messageText = message.text.trim();
+    console.log(`Parsed message text`);
+    console.log(messageText);
+
+    let regex = RegExp("Projektbeschreibung:\\s(.+)\\s+Unterstationsnamen:\\s(.+)\\s+(\\d{1,2}-\\d{1,2}-\\d{1,4}).+(\\d{1,2}:\\d{1,2}:\\d{1,2}).(.+)\\s+(Ein|Aus)", "g");
+    let match = messageText.match(regex);
+    console.log(match);
+    match.forEach(element => {
+        console.log(regex.exec(element));
+        regex.lastIndex = 0; // This is neccessary because of a bug in the ECMAS3 REGEX engine.
+    });
 }
 
 
